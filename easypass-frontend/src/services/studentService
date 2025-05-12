@@ -1,0 +1,63 @@
+import axios from 'axios';
+import authService from './authService';
+
+const API_URL = 'http://localhost:8000/api';
+
+// Get current student details
+const getCurrentStudent = async () => {
+  try {
+    authService.setAuthHeader();
+    const response = await axios.get(`${API_URL}/students/me/`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching current student:', error);
+    throw error;
+  }
+};
+
+// Get all students (admin only)
+const getAllStudents = async () => {
+  try {
+    authService.setAuthHeader();
+    const response = await axios.get(`${API_URL}/students/`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching all students:', error);
+    throw error;
+  }
+};
+
+// Update student profile
+const updateStudentProfile = async (profileData) => {
+  try {
+    authService.setAuthHeader();
+    const response = await axios.patch(`${API_URL}/students/me/`, profileData);
+    return response.data;
+  } catch (error) {
+    console.error('Error updating student profile:', error);
+    throw error;
+  }
+};
+
+// Check in a student (admin only)
+const checkInStudent = async (tagId) => {
+  try {
+    authService.setAuthHeader();
+    const response = await axios.post(`${API_URL}/check-in/`, {
+      tag_id: tagId
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error checking in student:', error);
+    throw error;
+  }
+};
+
+const studentService = {
+  getCurrentStudent,
+  getAllStudents,
+  updateStudentProfile,
+  checkInStudent
+};
+
+export default studentService;
