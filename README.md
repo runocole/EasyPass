@@ -61,6 +61,3 @@ EasyPass is a queue management system designed to streamline the process of mana
 
 5. Visit the app in your browser at `http://localhost:3000` for the frontend and `http://localhost:8000` for the backend (Django API).
 
-## License
-
-This project is licensed under the MIT License.
